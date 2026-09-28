@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MDKT Infinity #002 — MadKat × Siroko · Preventa</title>
+<meta name="description" content="MDKT Infinity #002, la colección MadKat × Siroko dibujada a mano. Cielo o infierno: un pie de cada bando. Preventa, unidades muy limitadas.">
+<meta name="theme-color" content="#010101">
+<link rel="icon" type="image/webp" href="assets/madkat.webp">
+<meta property="og:title" content="MDKT Infinity #002 — MadKat × Siroko">
+<meta property="og:description" content="Cielo o infierno (o los dos). Preventa, unidades muy limitadas.">
+<link rel="preload" href="assets/shoe.webp" as="image">
+<link rel="preload" href="assets/rubius.webp" as="image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Big+Shoulders+Display:wght@900&family=Caveat:wght@500;700&family=Noto+Sans+JP:wght@500;700;900&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{--s:1}
+*{box-sizing:border-box}
+html,body{margin:0;background:#010101;color:#EFE7DA;font-family:'Archivo','Noto Sans JP',sans-serif;-webkit-font-smoothing:antialiased}
+body{overflow-x:hidden}
+button{font:inherit}
+.hand{font-family:'Caveat','Noto Sans JP',cursive;font-weight:700}
+.mono{font-family:'JetBrains Mono','Noto Sans JP',monospace;text-transform:uppercase}
+.jp{font-family:'Noto Sans JP',sans-serif}
+.big{font-family:'Big Shoulders Display','Noto Sans JP',sans-serif;font-weight:900;text-transform:uppercase}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* loader */
+#loader{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#E9E6DF;color:#4A7BD0;z-index:50;transition:opacity .4s ease}
+#loader span{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+#loader.hide{opacity:0;pointer-events:none}
+/* app shell */
+#app{display:none;position:relative;min-height:100vh;min-height:100svh;background:#E9E6DF;animation:pageBurn .9s ease 5.1s forwards}
+#app.on{display:block}
+@keyframes pageBurn{to{background:#010101}}
+.hdr{position:absolute;left:0;top:0;right:0;height:56px;padding:0 max(8px,env(safe-area-inset-right)) 0 max(24px,env(safe-area-inset-left));display:flex;align-items:center;justify-content:space-between;z-index:20;color:#1F1D1C;animation:toLight .5s ease 5.4s forwards}
+@keyframes toLight{to{color:#EFE7DA}}
+.hdr .sub{color:#6F6A63;animation:toSub .5s ease 5.4s forwards}
+@keyframes toSub{to{color:#8E8680}}
+.iconbtn{display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:transparent;border:0;padding:0;color:inherit;cursor:pointer}
+.layout{display:flex;flex-direction:column;align-items:center}
+#stageWrap{position:relative;overflow:visible}
+#stage{position:absolute;left:0;top:0;width:390px;height:670px;transform-origin:0 0}
+/* copy (mobile, scaled with --s) */
+.copy{position:relative;width:calc(342px * var(--s));margin:calc(-2px * var(--s)) auto 0;padding-bottom:calc(28px * var(--s));display:flex;flex-direction:column}
+.copy .desc{display:none}
+.hint{display:flex;align-items:center;justify-content:space-between;width:100%;height:calc(44px * var(--s));padding:0;background:transparent;border:0;color:#EFE7DA;cursor:pointer;text-align:left}
+.hint .t1{font-size:calc(26px * var(--s));line-height:1}
+.hint .t2{font-size:calc(20px * var(--s));color:#E9BFD3;white-space:nowrap}
+.hint .spin{display:flex;align-items:center;justify-content:center;width:calc(36px * var(--s));height:calc(36px * var(--s));border-radius:50%;border:1.5px solid rgba(233,191,211,.5);color:#E9BFD3;animation:hintspin 3.2s cubic-bezier(.6,0,.3,1) 9s infinite}
+.hint .spin svg{width:calc(16px * var(--s));height:calc(16px * var(--s))}
+@keyframes hintspin{0%,70%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+.row{margin-top:calc(6px * var(--s));display:flex;justify-content:space-between;align-items:center;font-size:calc(11px * var(--s));letter-spacing:.14em}
+.row .pre{display:flex;align-items:center;gap:8px;color:#E9BFD3}
+.row .lim{color:#8E7A84;white-space:nowrap}
+.dot{width:7px;height:7px;border-radius:50%;background:#E9BFD3;animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.25}}
+.cta{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;width:100%;height:calc(66px * var(--s));margin-top:calc(12px * var(--s));padding:0 calc(10px * var(--s)) 0 calc(24px * var(--s));background:#E9BFD3;color:#311A25;text-decoration:none;border-radius:4px;font-weight:800;font-size:calc(20px * var(--s));letter-spacing:.01em;transition:transform .2s ease, background .3s ease, color .3s ease;box-shadow:0 0 0 1px rgba(255,255,255,.25) inset, 0 10px 34px rgba(233,191,211,.28)}
+.cta:active{transform:scale(.98)}
+.cta:focus-visible,.hint:focus-visible,.flipbtn:focus-visible{outline:2px solid #E9BFD3;outline-offset:4px}
+.cta.hellcta{background:#FF7A5C;color:#2A080D;box-shadow:0 0 0 1px rgba(255,255,255,.25) inset, 0 10px 38px rgba(255,90,60,.4)}
+.cta .shine{position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.75),transparent);transform:skewX(-18deg);animation:shine 3.2s ease-in-out 8.6s infinite}
+@keyframes shine{0%{left:-60%}35%{left:130%}100%{left:130%}}
+.cta .arr{display:flex;align-items:center;justify-content:center;width:calc(48px * var(--s));height:calc(48px * var(--s));border-radius:50%;background:#311A25;color:#E9BFD3;flex:none}
+.cta .arr svg{animation:nudge 1.6s ease-in-out 8.6s infinite}
+@keyframes nudge{50%{transform:translateX(3px)}}
+.ctaglow{animation:ctaGlow 2.4s ease-in-out 8.6s infinite}
+@keyframes ctaGlow{50%{box-shadow:0 0 0 1px rgba(255,255,255,.3) inset, 0 12px 44px rgba(233,191,211,.5)}}
+.in{opacity:0;animation:up .8s cubic-bezier(.2,.7,.1,1) forwards}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.pagetone{position:absolute;left:0;right:0;bottom:0;height:40%;background-image:radial-gradient(circle,#4A2A3A 1.15px,transparent 1.45px);background-size:7px 7px;-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 60%);mask-image:linear-gradient(180deg,transparent 0%,#000 60%);opacity:0;animation:toneIn .8s ease 5.6s forwards;pointer-events:none}
+@keyframes toneIn{to{opacity:.4}}
+/* desktop: two columns */
+@media (min-width:900px) and (min-aspect-ratio:1/1){
+.layout{flex-direction:row-reverse;justify-content:center;align-items:center;gap:clamp(40px,6vw,120px);min-height:100vh;min-height:100svh;padding:72px 48px 32px}
+.copy{width:min(460px,38vw);margin:0;padding:0}
+.copy .desc{display:block;margin:18px 0 0;font-size:17px;line-height:1.5;color:#A99DA3;max-width:420px}
+.hint{height:auto;flex-direction:column;align-items:flex-start;gap:14px}
+.hint .t1{font-size:clamp(64px,7.2vw,112px);line-height:.86}
+.hint .t2{font-size:clamp(28px,2.8vw,40px)}
+.hint .spin{display:none}
+.hint .lbl{display:flex !important;flex-direction:column;gap:8px}
+.row{order:-1;margin:0 0 22px;font-size:12px;justify-content:flex-start;gap:28px}
+.cta{height:72px;margin-top:34px;font-size:22px;padding:0 12px 0 28px;max-width:420px}
+.cta .arr{width:52px;height:52px}
+.fliptip{display:flex !important}
+}
+.fliptip{display:none;margin-top:16px;align-items:center;gap:10px;font-size:11px;letter-spacing:.14em;color:#8E7A84}
+/* ================= STAGE (390 × 670 design space) ================= */
+#stage *{box-sizing:border-box}
+.flipper{position:absolute;inset:0;transform-origin:195px 380px;transform-style:preserve-3d}
+.flipper.out{animation:flipOut .26s cubic-bezier(.6,0,.9,.5) forwards}
+.flipper.in2{animation:flipIn .42s cubic-bezier(.15,.6,.25,1.25) forwards}
+@keyframes flipOut{to{transform:perspective(1000px) rotateY(90deg) scale(.96)}}
+@keyframes flipIn{from{transform:perspective(1000px) rotateY(-90deg) scale(.96)}to{transform:perspective(1000px) rotateY(0deg)}}
+.tiltall{position:absolute;inset:0;transform-origin:195px 380px;transform-style:preserve-3d;transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.face{position:absolute;inset:0;transform-style:preserve-3d}
+.face.gone{visibility:hidden}
+.zpop{position:absolute;inset:0;transform:translateZ(16px);transform-style:preserve-3d;pointer-events:none}
+.slab{position:absolute;left:22px;top:58px;width:346px;height:604px;border-radius:16px;border:1.5px solid rgba(236,226,232,.3);background:linear-gradient(140deg,rgba(255,255,255,.09) 0%,rgba(255,255,255,0) 26%,rgba(255,255,255,0) 70%,rgba(255,255,255,.06) 100%);box-shadow:inset 0 0 0 6px rgba(255,255,255,.035), inset 0 0 0 7px rgba(236,226,232,.12), 0 30px 60px rgba(0,0,0,.6);opacity:0;transform:translateY(24px);animation:slabIn .7s cubic-bezier(.2,.8,.2,1) 6.9s forwards;pointer-events:none}
+@keyframes slabIn{to{opacity:1;transform:none}}
+.label{position:absolute;left:32px;top:66px;width:326px;height:40px;border-radius:4px;background:#EFE7DA;color:#311A25;overflow:hidden;display:flex;align-items:center;justify-content:space-between;padding:4px 10px 0;opacity:0;animation:fadeIn .01s linear 7.15s forwards}
+.label::before{content:'';position:absolute;left:0;top:0;right:0;height:4px;background:#5B3446}
+.label .ln{white-space:nowrap;clip-path:inset(0 100% 0 0);animation:type .45s steps(18) forwards}
+@keyframes type{to{clip-path:inset(0 0 0 0)}}
+.gloss{position:absolute;left:22px;top:58px;width:346px;height:604px;border-radius:16px;overflow:hidden;pointer-events:none;opacity:0;animation:fadeIn .6s ease 7.2s forwards}
+.gloss i{position:absolute;top:-40px;left:-140px;width:90px;height:700px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.14),transparent);transform:skewX(-20deg);animation:gloss 5.5s ease-in-out 8s infinite}
+@keyframes gloss{0%{left:-140px}30%,100%{left:460px}}
+.foil{position:absolute;left:34px;top:112px;width:322px;height:540px;border-radius:16px;background:linear-gradient(125deg,#E9BFD3,#FFF4FA 18%,#B9A2D9 34%,#E9BFD3 50%,#9FD3E6 66%,#FFE7B5 82%,#E9BFD3);background-size:320% 320%;opacity:0;animation:fadeIn .5s ease 5.35s forwards, foil 7s linear 5.35s infinite;box-shadow:0 0 34px rgba(233,191,211,.25)}
+.foil.hell{background:linear-gradient(125deg,#FF6A4A,#3A0E14 18%,#FFB36B 34%,#A3182F 50%,#FF6A4A 66%,#5B0F1C 82%,#FF6A4A);background-size:320% 320%;opacity:1;animation:foil 5s linear infinite;box-shadow:0 0 40px rgba(255,90,60,.35)}
+@keyframes foil{to{background-position:320% 320%}}
+.art{position:absolute;left:41px;top:119px;width:308px;height:526px;border-radius:11px;overflow:hidden;pointer-events:none}
+.photo{position:absolute;left:-49.3px;top:74px;width:492.5px;height:615.6px;overflow:hidden;clip-path:inset(45px 94.2px 44.6px 90.3px round 11px);filter:brightness(.3) contrast(1.25) saturate(.6);animation:bright 1.4s ease 5.1s forwards}
+.photo img{display:block;width:492.5px;height:615.6px;transform:scale(1.08);transform-origin:244px 361px;animation:settle 2.4s cubic-bezier(.2,0,.1,1) 5s forwards}
+@keyframes bright{to{filter:brightness(1) contrast(1) saturate(1)}}
+@keyframes settle{to{transform:scale(1)}}
+.vig{position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,7,11,.8) 0,rgba(14,7,11,0) 58px,rgba(14,7,11,0) 400px,rgba(14,7,11,.7) 470px,rgba(14,7,11,.95) 526px);opacity:0;animation:fadeIn .6s ease 6.8s forwards}
+.artholo{position:absolute;inset:0;opacity:0;mix-blend-mode:color-dodge;background-image:radial-gradient(circle,rgba(255,220,240,.9) .8px,transparent 1.6px),radial-gradient(circle,rgba(170,210,255,.8) .7px,transparent 1.5px),linear-gradient(115deg,rgba(255,0,150,0) 30%,rgba(255,140,200,.35) 45%,rgba(140,200,255,.35) 55%,rgba(255,0,150,0) 70%);background-size:23px 19px,31px 27px,300% 100%;background-position:0 0,11px 7px,50% 0;animation:holoIn .8s ease 7.3s forwards;transition:background-position .35s ease-out}
+@keyframes holoIn{to{opacity:.32}}
+.titlebar{position:absolute;left:41px;top:119px;width:308px;height:40px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;clip-path:inset(0 100% 0 0);animation:type .5s cubic-bezier(.7,0,.2,1) 7.9s forwards}
+.cardinfo{position:absolute;left:41px;top:592px;width:308px;height:53px;padding:0 20px;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:6px;opacity:0;animation:up .6s cubic-bezier(.2,.7,.1,1) 8.1s forwards}
+.rivet{position:absolute;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFFFFF 0%,#D9D2D6 28%,#8A7F86 62%,#3E353B 100%);box-shadow:0 1px 1.5px rgba(0,0,0,.7), inset 0 -1px 1px rgba(0,0,0,.35)}
+.moves{display:flex;justify-content:space-between;gap:6px;font-size:9px;letter-spacing:.06em;color:#EFE7DA;white-space:nowrap}
+.moves span{display:flex;align-items:center;gap:4px}
+.moves i{display:block;width:6px;height:6px;transform:rotate(45deg);background:#E9BFD3}
+.foot{display:flex;justify-content:space-between;font-size:8.5px;letter-spacing:.1em;color:#A8929C;white-space:nowrap}
+.typeicon{display:flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#EFE7DA}
+.slash{position:absolute;left:41px;top:119px;width:308px;height:526px;border-radius:11px;overflow:hidden;pointer-events:none}
+.slash i{position:absolute;top:-60px;left:-160px;width:70px;height:660px;background:linear-gradient(90deg,transparent,rgba(255,246,250,.9),transparent);transform:skewX(-24deg);opacity:0;animation:slash .42s cubic-bezier(.5,0,.3,1) 7.85s}
+@keyframes slash{0%{opacity:1;left:-160px}100%{opacity:1;left:420px}}
+.hellart{position:absolute;left:41px;top:119px;width:308px;height:526px;border-radius:11px;overflow:hidden;background:radial-gradient(circle at 50% 62%,#7A1624 0%,#2A080D 52%,#0B0204 100%)}
+.hellart .dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,90,60,.35) 1.1px,transparent 1.5px);background-size:7px 7px;-webkit-mask-image:radial-gradient(circle at 50% 60%,#000 20%,transparent 75%);mask-image:radial-gradient(circle at 50% 60%,#000 20%,transparent 75%)}
+.hellart .kanji{position:absolute;left:0;top:96px;width:308px;text-align:center;font-size:150px;font-weight:900;line-height:1;color:rgba(255,106,74,.1);letter-spacing:-.04em}
+.hellart .rays{position:absolute;inset:-100px;background:repeating-conic-gradient(from 0deg at 50% 58%,rgba(255,106,74,.12) 0deg 4deg,transparent 4deg 12deg);animation:spinslow 30s linear infinite}
+@keyframes spinslow{to{transform:rotate(360deg)}}
+.hellshoe{position:absolute;left:25px;top:330px;width:340px;height:210px;transform:rotate(-3deg);filter:drop-shadow(0 0 22px rgba(255,80,50,.45));animation:hellIn .5s cubic-bezier(.2,1.3,.3,1) .1s both}
+@keyframes hellIn{from{opacity:0;transform:translateY(20px) rotate(-8deg) scale(.9)}to{opacity:1;transform:rotate(-3deg)}}
+.hellholo{position:absolute;inset:0;mix-blend-mode:color-dodge;opacity:.35;background-image:radial-gradient(circle,rgba(255,190,120,.9) .8px,transparent 1.6px),linear-gradient(115deg,transparent 30%,rgba(255,120,60,.4) 48%,rgba(255,220,120,.35) 55%,transparent 70%);background-size:23px 19px,300% 100%;background-position:0 0,50% 0;transition:background-position .35s ease-out}
+.hellin{opacity:0;animation:up .45s cubic-bezier(.2,.7,.1,1) .15s forwards}
+.hellface .titlebar{animation:none;clip-path:none;background:linear-gradient(180deg,rgba(20,4,8,.85),rgba(20,4,8,0))}
+.hellface .cardinfo{background:linear-gradient(180deg,rgba(20,4,8,0),rgba(20,4,8,.9) 40%)}
+.screen{position:absolute;inset:0;animation:shake .5s linear 6.3s both}
+@keyframes shake{0%{transform:none}10%{transform:translate(-7px,4px) rotate(-.6deg)}25%{transform:translate(6px,-5px) rotate(.5deg)}40%{transform:translate(-4px,3px)}60%{transform:translate(3px,-2px)}80%{transform:translate(-1px,1px)}100%{transform:none}}
+.cardcracks{position:absolute;inset:0;clip-path:inset(58px 22px 8px 22px round 16px);pointer-events:none}
+.crk{fill:none;stroke:#F6EEF2;stroke-width:1.1;stroke-linecap:round;stroke-linejoin:round;animation:draw .12s ease-out forwards}
+.crkd{fill:none;stroke:#0B0708;stroke-width:2.6;opacity:.55;stroke-linecap:round;stroke-linejoin:round;animation:draw .12s ease-out forwards}
+.glass{fill:rgba(236,226,232,.08);stroke:none;opacity:0;animation:fadeIn .2s ease 6.34s forwards}
+.boom{position:absolute;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:50%;background:radial-gradient(circle,rgba(255,244,250,.95) 0%,rgba(222,203,210,.45) 30%,rgba(222,203,210,0) 70%);opacity:0;transform:scale(.2);animation:boom .55s cubic-bezier(.2,.8,.3,1) 6.28s forwards;pointer-events:none}
+@keyframes boom{15%{opacity:1}100%{opacity:0;transform:scale(1.4)}}
+.shard{position:absolute;width:0;height:0;offset-anchor:0 0;offset-rotate:0deg;offset-distance:0%;animation-name:fly;animation-timing-function:cubic-bezier(.3,.1,.8,.6);animation-fill-mode:both;pointer-events:none}
+.shard svg{position:absolute;left:-10px;top:-10px;animation:spin .5s linear infinite}
+@keyframes fly{0%{offset-distance:0%;opacity:0}4%{opacity:1}75%{opacity:1}100%{offset-distance:100%;opacity:0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.imp{position:absolute;inset:-400px;pointer-events:none;opacity:0}
+.impA{-webkit-backdrop-filter:invert(1) grayscale(1) contrast(1.7);backdrop-filter:invert(1) grayscale(1) contrast(1.7);animation:hold .09s linear 6.24s}
+.impB{-webkit-backdrop-filter:grayscale(1) contrast(3.2) brightness(1.25);backdrop-filter:grayscale(1) contrast(3.2) brightness(1.25);animation:hold .08s linear 6.33s}
+@keyframes hold{0%,100%{opacity:1}}
+.speed{position:absolute;inset:0;pointer-events:none;opacity:0;animation:speedIn .75s cubic-bezier(.2,.6,.3,1) 6.24s forwards}
+.speed svg{overflow:visible}
+@keyframes speedIn{0%{opacity:1}14%{opacity:1}100%{opacity:0}}
+.speed path{fill:#F6EEF2}
+.sfx{position:absolute;font-family:'Noto Sans JP',sans-serif;font-weight:900;line-height:1;white-space:nowrap;color:#F6EEF2;-webkit-text-stroke:5px #311A25;paint-order:stroke fill;text-shadow:4px 4px 0 #311A25;pointer-events:none;opacity:0;animation-duration:1.35s;animation-timing-function:cubic-bezier(.2,1.4,.4,1);animation-fill-mode:forwards}
+.s1{animation-name:sfx1}.s2{animation-name:sfx2}
+@keyframes sfx1{0%{opacity:0;transform:scale(2.4) rotate(-14deg)}10%{opacity:1;transform:scale(.92) rotate(-14deg)}18%{transform:scale(1.04) rotate(-14deg)}24%,82%{opacity:1;transform:scale(1) rotate(-14deg)}100%{opacity:0;transform:scale(1.08) rotate(-14deg)}}
+@keyframes sfx2{0%{opacity:0;transform:scale(2.4) rotate(9deg)}10%{opacity:1;transform:scale(.92) rotate(9deg)}18%{transform:scale(1.04) rotate(9deg)}24%,82%{opacity:1;transform:scale(1) rotate(9deg)}100%{opacity:0;transform:scale(1.08) rotate(9deg)}}
+.paper{position:absolute;inset:-2px;pointer-events:none;background:#E9E6DF;-webkit-mask-image:url(assets/burn.webp);mask-image:url(assets/burn.webp);-webkit-mask-size:1600% 100%;mask-size:1600% 100%;-webkit-mask-position:0 0;mask-position:0 0;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;animation:burn 1.2s steps(15) 4.95s forwards}
+@keyframes burn{to{-webkit-mask-position:100% 0;mask-position:100% 0}}
+.paper .tex{position:absolute;inset:0;background-image:linear-gradient(rgba(74,123,208,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(74,123,208,.07) 1px,transparent 1px);background-size:26px 26px;background-position:13px 13px}
+.paper .tooth{display:none}
+.ember{position:absolute;inset:-2px;pointer-events:none;background-image:url(assets/ember.webp);background-size:1600% 100%;background-position:0 0;background-repeat:no-repeat;opacity:0;animation:burn2 1.2s steps(15) 4.95s forwards, emb 1.3s linear 4.95s forwards;filter:drop-shadow(0 0 6px rgba(255,110,50,.7))}
+@keyframes burn2{to{background-position:100% 0}}
+@keyframes emb{0%{opacity:1}92%{opacity:1}100%{opacity:0}}
+.papernote{animation:fadeOut .35s ease 4.6s forwards}
+.breath{position:absolute;inset:0;pointer-events:none;transform-origin:195px 558px;animation:breath 4.8s ease-in-out 8.6s infinite}
+@keyframes breath{50%{transform:translateY(-1.5px) scale(1.006)}}
+.pop{position:absolute;inset:0;transform-origin:195px 558px;pointer-events:none;animation:pop .9s cubic-bezier(.2,1.1,.3,1) 6.2s forwards, popsh .4s ease 6.2s forwards}
+@keyframes pop{0%{transform:none}28%{transform:translateY(-10px) scale(1.025) rotate(-2deg)}62%{transform:translateY(1px) scale(.99) rotate(.4deg)}100%{transform:none}}
+@keyframes popsh{to{filter:drop-shadow(0 0 26px rgba(92,52,72,.55))}}
+.shoe{position:absolute;left:0;top:0;width:1646px;height:1111px;transform-origin:0 0;transform:matrix(0.32874,-0.02876,0.02876,0.32874,-89.08,273.69);animation:move 1.2s cubic-bezier(.7,0,.15,1) 4.8s forwards}
+@keyframes move{to{transform:matrix(0.328712,0.0057714,-0.0057714,0.328712,-69.670,245.189)}}
+.fillsvg{position:absolute;left:0;top:0;overflow:visible}
+.hm{fill:none;stroke:#fff;stroke-width:110;stroke-linecap:round;stroke-linejoin:round;animation-name:draw;animation-timing-function:linear;animation-fill-mode:forwards}
+.holowrap{position:absolute;left:230px;top:180px;width:1170px;height:765px;opacity:0;animation:fadeIn .8s ease 8.4s forwards;-webkit-mask-image:url(assets/shoe.webp);mask-image:url(assets/shoe.webp);-webkit-mask-size:100% 100%;mask-size:100% 100%;mix-blend-mode:screen}
+.holo{position:absolute;inset:0;opacity:.35;background:linear-gradient(112deg,rgba(255,255,255,0) 30%,rgba(233,191,211,.55) 44%,rgba(255,255,255,.5) 50%,rgba(170,200,255,.35) 56%,rgba(255,255,255,0) 70%);background-size:300% 100%;background-position:50% 0;transition:background-position .35s ease-out, opacity .35s ease}
+.inks{position:absolute;left:0;top:0;overflow:visible;animation:inkOut .5s ease 4.7s forwards}
+@keyframes inkOut{to{opacity:0}}
+.k,.kg,.c,.cf{fill:none;stroke-linecap:round;stroke-linejoin:round;animation-name:draw;animation-fill-mode:forwards}
+.k{stroke:#161415;stroke-width:5.2;animation-timing-function:linear}
+.kg{stroke:#161415;stroke-width:9;opacity:.08;animation-timing-function:linear}
+.c{stroke:#4A7BD0;stroke-width:2.6;opacity:.62;animation-timing-function:cubic-bezier(.3,0,.2,1)}
+.cf{stroke:#4A7BD0;stroke-width:1.8;opacity:.32;animation-timing-function:cubic-bezier(.3,0,.2,1)}
+@keyframes draw{to{stroke-dashoffset:0}}
+.pen{position:absolute;left:0;top:0;width:0;height:0;offset-anchor:0 0;offset-rotate:0deg;offset-distance:0%;opacity:0}
+.penA{animation:pmove 2.4s linear 1s both, pin .3s ease .75s forwards, pout .3s ease 3.4s forwards}
+.penB{animation:pmove 1.35s linear 3.45s both, pin .25s ease 3.3s forwards, plift .5s cubic-bezier(.5,0,.8,.4) 4.8s forwards}
+@keyframes pmove{from{offset-distance:0%}to{offset-distance:100%}}
+@keyframes pin{to{opacity:1}}
+@keyframes pout{to{opacity:0}}
+@keyframes plift{to{opacity:0;translate:260px -420px}}
+.pen svg{position:absolute;left:-40px;top:-392px;transform-origin:40px 392px;transform:rotate(30deg);animation:wob .16s ease-in-out infinite alternate;filter:drop-shadow(14px 18px 10px rgba(0,0,0,.28))}
+.penB svg{transform:rotate(52deg);animation-name:wob2;animation-duration:.09s}
+@keyframes wob{from{transform:rotate(28.5deg)}to{transform:rotate(31.5deg)}}
+@keyframes wob2{from{transform:rotate(49deg)}to{transform:rotate(55deg)}}
+.kira{fill:#FFF7FB;transform-box:fill-box;transform-origin:center;transform:scale(0);filter:drop-shadow(0 0 4px rgba(255,236,246,.95));animation:kira 2.6s ease-in-out infinite}
+@keyframes kira{0%,62%{transform:scale(0) rotate(0deg)}74%{transform:scale(1) rotate(45deg)}88%,100%{transform:scale(0) rotate(90deg)}}
+.notes{position:absolute;inset:0;pointer-events:none;animation:fadeOut .35s ease 4.55s forwards}
+.arrow{fill:none;stroke:#2F4F86;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;animation:draw .45s cubic-bezier(.5,0,.2,1) forwards}
+.note{position:absolute;font-size:21px;line-height:1;color:#2F4F86;white-space:nowrap;clip-path:inset(-10px 100% -10px 0);animation:write .55s cubic-bezier(.4,0,.3,1) forwards}
+@keyframes write{to{clip-path:inset(-10px -10px -10px 0)}}
+.flipbtn{position:absolute;left:34px;top:112px;width:322px;height:540px;border-radius:16px;background:transparent;border:0;padding:0;cursor:pointer}
+@keyframes fadeIn{to{opacity:1}}
+@keyframes fadeOut{to{opacity:0}}
+@media (prefers-reduced-motion: reduce){
+#app *,#app{animation-duration:.01s !important;animation-delay:0s !important;animation-iteration-count:1 !important}
+.imp,.speed,.sfx,.slash i,.pen{display:none}
+}
+</style>
+</head>
+<body>
+<div id="loader"><span>Cargando boceto…</span></div>
+<div id="app">
+<div class="pagetone"></div>
+<header class="hdr">
+<a href="https://www.siroko.com/es/" aria-label="Siroko — inicio" style="display: flex; align-items: center; gap: 12px; color: inherit; text-decoration: none">
+<svg width="99" height="13" viewBox="0 0 114 15" fill="none" role="img" aria-label="SIROKO" style="display: block"><path d="M27.8165 0.224114H23.1676V14.7489H27.8165V0.224114Z" fill="currentColor"></path><path d="M48.7832 7.42774C48.9424 6.95991 49.0281 6.12957 49.0281 4.93672C49.0281 3.91533 48.9865 3.18052 48.8885 2.74453C48.7514 2.0734 48.4525 1.51984 47.9945 1.10589C47.4948 0.647857 46.8555 0.371077 46.1011 0.297596C45.6431 0.255956 44.1539 0.233912 41.631 0.224114H30.937V14.7489H35.3631V11.0577H41.5992C42.5887 11.0577 43.228 11.0896 43.5244 11.1532C43.9922 11.2488 44.2788 11.5672 44.3866 12.111C44.46 12.4931 44.5041 13.1103 44.5041 13.9725V14.7489H48.8665V13.3969C48.8665 12.1526 48.8346 11.3223 48.771 10.9181C48.7073 10.5238 48.5579 10.1833 48.3252 9.91876C47.9431 9.48277 47.2719 9.21579 46.324 9.12026C46.7919 9.04678 47.1446 8.97085 47.3773 8.87532C48.068 8.60834 48.5383 8.12091 48.7808 7.42774H48.7832ZM44.4209 6.8105C44.2616 7.16076 43.8673 7.35426 43.2403 7.3861C43.0688 7.3959 42.5177 7.41794 41.5918 7.42774H35.3679V3.85165H41.582C42.5716 3.86144 43.1668 3.87369 43.3701 3.88349C43.9334 3.92513 44.2959 4.12843 44.4453 4.47869C44.5409 4.72362 44.5948 5.08613 44.5948 5.58581C44.5948 6.16141 44.5409 6.56556 44.4233 6.8105H44.4209Z" fill="currentColor"></path><path d="M67.7904 0.246159C66.6098 0.086949 64.4592 0.0110182 61.3216 0.0110182C58.1839 0.0110182 56.0334 0.0844996 54.8528 0.246159C53.1602 0.469052 52.1193 1.27735 51.7347 2.66125C51.4677 3.60916 51.3404 5.18411 51.3404 7.3959C51.3404 9.72526 51.4677 11.3639 51.7347 12.3118C52.1168 13.6957 53.1602 14.504 54.8528 14.7269C56.0334 14.8861 58.2035 14.962 61.3657 14.962C64.5278 14.962 66.622 14.8885 67.7928 14.7269C69.4854 14.504 70.5288 13.6957 70.9109 12.3118C71.1779 11.3639 71.3052 9.7473 71.3052 7.48163C71.3052 5.21595 71.1779 3.60916 70.9109 2.66125C70.5288 1.27735 69.4854 0.469052 67.7928 0.246159H67.7904ZM66.7273 9.79139C66.5559 10.5262 66.0244 10.9524 65.1304 11.0577C64.4715 11.1434 63.2149 11.1851 61.3534 11.1851C59.4478 11.1851 58.1717 11.1434 57.5128 11.0577C56.6188 10.9524 56.0872 10.5262 55.906 9.79139C55.8105 9.39704 55.7688 8.74795 55.7688 7.86618C55.7688 6.46268 55.8423 5.50498 56.004 4.98326C56.1632 4.46154 56.5355 4.12108 57.1111 3.97166C57.5912 3.85409 58.9947 3.79041 61.3363 3.79041C62.8157 3.79041 63.7416 3.80021 64.1016 3.81246C65.123 3.86634 65.7941 4.00351 66.1126 4.2264C66.4628 4.47134 66.698 4.94897 66.7935 5.68378C66.8474 6.11977 66.8792 6.85458 66.8792 7.88577C66.8792 8.74795 66.8253 9.38724 66.7298 9.79139H66.7273Z" fill="currentColor"></path><path d="M92.9406 0.128588H86.173L80.4267 5.49273H78.0018V0.224114H73.5758V14.7489H78.0018V9.19374H80.4267L86.9298 14.7489H93.6534L84.5466 7.35426L92.9406 0.128588Z" fill="currentColor"></path><path d="M113.464 2.66125C113.082 1.27735 112.038 0.469052 110.346 0.246159C109.165 0.086949 107.015 0.0110182 103.877 0.0110182C100.739 0.0110182 98.5889 0.0844996 97.4083 0.246159C95.7158 0.469052 94.6748 1.27735 94.2902 2.66125C94.0232 3.60916 93.8959 5.18411 93.8959 7.3959C93.8959 9.72526 94.0232 11.3639 94.2902 12.3118C94.6723 13.6957 95.7158 14.504 97.4083 14.7269C98.5889 14.8861 100.759 14.962 103.921 14.962C107.083 14.962 109.178 14.8885 110.348 14.7269C112.041 14.504 113.082 13.6957 113.466 12.3118C113.733 11.3639 113.861 9.7473 113.861 7.48163C113.861 5.21595 113.733 3.60916 113.466 2.66125H113.464ZM109.28 9.79139C109.109 10.5262 108.577 10.9524 107.683 11.0577C107.025 11.1434 105.768 11.1851 103.906 11.1851C102.001 11.1851 100.725 11.1434 100.066 11.0577C99.1718 10.9524 98.6403 10.5262 98.4591 9.79139C98.3635 9.39704 98.3219 8.74795 98.3219 7.86618C98.3219 6.46268 98.3954 5.50498 98.557 4.98326C98.7162 4.46154 99.0885 4.12108 99.6642 3.97166C100.144 3.85409 101.548 3.79041 103.889 3.79041C105.369 3.79041 106.295 3.80021 106.657 3.81246C107.679 3.86634 108.35 4.00351 108.668 4.2264C109.018 4.47134 109.253 4.94897 109.349 5.68378C109.403 6.11977 109.435 6.85458 109.435 7.88577C109.435 8.74795 109.381 9.38724 109.285 9.79139H109.28Z" fill="currentColor"></path><path d="M20.1255 8.40749C19.9467 7.82209 19.5278 7.09217 18.8885 6.66108C18.3962 6.32797 17.6418 6.08793 16.64 5.94831C15.8488 5.83809 6.51426 5.50987 6.11501 5.4119C5.65453 5.29923 5.43408 4.98816 5.43408 4.48114C5.43408 3.94472 5.64228 3.61895 6.07582 3.49159C6.46772 3.38381 8.11615 3.32993 10.279 3.32993C12.5642 3.32993 13.882 3.36177 14.2347 3.41566C14.6952 3.49159 15.2463 3.8443 15.2634 4.26804H20.0079C20.0177 3.94227 19.9589 2.97722 19.8413 2.51183C19.687 1.88479 19.3711 1.39247 18.8885 1.03486C18.3325 0.628262 17.4164 0.339235 16.1575 0.182475C15.2047 0.0649046 13.5562 0.0012207 11.2097 0.0012207C8.19453 0.0012207 5.71086 0.0551071 4.52292 0.16288C3.72442 0.231462 3.00675 0.424963 2.38216 0.736035C1.25544 1.29694 0.687187 2.64165 0.687187 4.76526C0.687187 5.49763 0.763118 6.11977 0.900283 6.59495C1.00316 6.93786 1.15747 7.23179 1.33872 7.49387C1.33872 7.49387 1.78206 8.10377 2.13722 8.33891C2.62954 8.67202 3.38395 8.91206 4.38575 9.05168C5.1769 9.1619 14.5115 9.49012 14.9107 9.58809C15.3712 9.70076 15.5966 10.0118 15.5966 10.5189C15.5966 11.0553 15.3835 11.381 14.9499 11.5084C14.558 11.6162 12.6598 11.6701 10.497 11.6701C8.21168 11.6701 6.89391 11.6382 6.5412 11.5843C6.08072 11.5084 5.52961 11.1557 5.51981 10.732H0.768017C0.758219 11.0577 0.817004 12.0228 0.934574 12.4882C1.08889 13.1152 1.40486 13.6075 1.88738 13.9651C2.44339 14.3717 3.35946 14.6608 4.61844 14.8175C5.57615 14.9351 7.21968 14.9988 9.56619 14.9988C12.5814 14.9988 15.3149 14.9449 16.5053 14.8371C17.3038 14.7685 18.0263 14.575 18.646 14.264C19.7752 13.703 20.3435 12.3583 20.3435 10.2323C20.3435 9.49991 20.2749 8.87777 20.1304 8.40259L20.1255 8.40749Z" fill="currentColor"></path></svg>
+<span class="mono sub" style="font-size: 10px; letter-spacing: .12em">× MadKat</span>
+</a>
+<button class="iconbtn" type="button" aria-label="Abrir menú"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h11"></path></svg></button>
+</header>
+<main class="layout">
+<div id="stageWrap">
+<div id="stage">
+<div class="slab"></div>
+<div class="flipper" id="flipper">
+<div class="tiltall" id="tiltall">
+<div class="face" id="front">
+<div class="foil"></div>
+<div class="screen">
+<div class="photo"><img src="assets/rubius.webp" alt="El Rubius sostiene en la mano la zapatilla MDKT Infinity #002 dibujada"></div>
+<div class="art"><div class="vig"></div><div class="artholo" id="artHolo"></div></div>
+<div class="titlebar">
+<div style="display: flex; align-items: baseline; gap: 8px">
+<span class="big" style="font-size: 24px; line-height: 1; color: #EFE7DA">El Rubius</span>
+<span class="jp" style="font-size: 11px; font-weight: 700; color: #E9BFD3; letter-spacing: .1em" aria-hidden="true">ルビウス</span>
+</div>
+<div style="display: flex; align-items: center; gap: 8px" aria-hidden="true">
+<span class="mono" style="font-size: 9px; letter-spacing: .14em; color: #DECBD2">天国 · 002</span>
+<span class="typeicon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#311A25" stroke-width="2" stroke-linecap="round"><ellipse cx="12" cy="6" rx="7" ry="2.2"></ellipse><path d="M6 13a6 6 0 0 0 12 0M8.5 12.5v.5M15.5 12.5v.5M10 17q2 1.5 4 0"></path></svg></span>
+</div>
+</div>
+<div class="cardinfo mono">
+<span class="rivet" style="left: 5px; top: 5px"></span><span class="rivet" style="right: 5px; top: 5px"></span><span class="rivet" style="left: 5px; bottom: 5px"></span><span class="rivet" style="right: 5px; bottom: 5px"></span>
+<div class="moves"><span><i></i>Gato ángel</span><span><i></i>Caña alta</span><span><i></i>Memory foam</span></div>
+<div class="foot"><span>Illus. MadKat × Siroko</span><span class="jp" aria-hidden="true">天国の足</span><span>★ 002/R</span></div>
+</div>
+<div class="slash"><i></i></div>
+</div>
+<div class="paper">
+<div class="tex"></div>
+<div class="tooth"></div>
+<div class="papernote">
+<svg width="390" height="670" viewBox="0 0 390 670" style="position: absolute; left: 0; top: 0" aria-hidden="true">
+<path d="M16 34 L16 16 L34 16 M356 16 L374 16 L374 34 M374 636 L374 654 L356 654 M34 654 L16 654 L16 636" fill="none" stroke="#6F6A63" stroke-width="1.2"></path>
+</svg>
+<div class="mono" style="position: absolute; left: 24px; top: 74px; font-size: 10px; letter-spacing: .16em; color: #4A7BD0">Concept 002 · vista lateral</div>
+<div class="mono" style="position: absolute; left: 24px; top: 626px; width: 342px; display: flex; justify-content: space-between; padding-top: 10px; border-top: 1px solid rgba(74,123,208,.35); font-size: 10px; letter-spacing: .14em; color: #6F6A63"><span>MDKT Infinity #002</span><span>MadKat × Siroko</span></div>
+</div>
+</div>
+<div class="ember"></div>
+<div class="cardcracks"><svg id="crackSvg" width="390" height="670" viewBox="0 0 390 670" style="position: absolute; left: 0; top: 0" aria-hidden="true"></svg></div>
+<div class="zpop">
+<div class="breath">
+<div class="pop">
+<div class="shoe">
+<svg class="fillsvg" width="1646" height="1111" viewBox="0 0 1646 1111" aria-hidden="true">
+<defs><mask id="hatchmask"></mask></defs>
+<image href="assets/shoe.webp" x="230" y="186" width="1170" height="765" mask="url(#hatchmask)" style="filter: brightness(0) blur(5px); opacity: .6"></image>
+<image href="assets/shoe.webp" x="230" y="180" width="1170" height="765" mask="url(#hatchmask)"></image>
+</svg>
+<div class="holowrap"><div class="holo" id="shoeHolo"></div></div>
+<svg class="inks" id="inks" width="1646" height="1111" viewBox="0 0 1646 1111" aria-hidden="true"></svg>
+<div class="pen penA" style="offset-path: path('{{pen}}')">
+<svg width="80" height="400" viewBox="-40 -392 80 400" aria-hidden="true">
+<path d="M0 0 L-16 -64 L16 -64 Z" fill="#E6D3B1" stroke="#1F1D1C" stroke-width="3" stroke-linejoin="round"></path>
+<path d="M0 0 L-5 -20 L5 -20 Z" fill="#1F1D1C"></path>
+<path d="M-16 -64 L-16 -300 L16 -300 L16 -64 Z" fill="#1F1D1C"></path>
+<path d="M-5 -66 L-5 -298" stroke="#4A4643" stroke-width="5"></path>
+<path d="M-17 -300 L-17 -336 L17 -336 L17 -300 Z" fill="#B9B3A9" stroke="#1F1D1C" stroke-width="3"></path>
+<path d="M-17 -312 L17 -312 M-17 -324 L17 -324" stroke="#1F1D1C" stroke-width="2"></path>
+<path d="M-16 -336 L-16 -372 Q-16 -386 0 -386 Q16 -386 16 -372 L16 -336 Z" fill="#C8452F" stroke="#1F1D1C" stroke-width="3"></path>
+</svg>
+</div>
+<div class="pen penB" style="offset-path: path('{{hpen}}')">
+<svg width="80" height="400" viewBox="-40 -392 80 400" aria-hidden="true">
+<path d="M0 0 L-16 -64 L16 -64 Z" fill="#E6D3B1" stroke="#1F1D1C" stroke-width="3" stroke-linejoin="round"></path>
+<path d="M0 0 L-5 -20 L5 -20 Z" fill="#1F1D1C"></path>
+<path d="M-16 -64 L-16 -300 L16 -300 L16 -64 Z" fill="#1F1D1C"></path>
+<path d="M-5 -66 L-5 -298" stroke="#4A4643" stroke-width="5"></path>
+<path d="M-17 -300 L-17 -336 L17 -336 L17 -300 Z" fill="#B9B3A9" stroke="#1F1D1C" stroke-width="3"></path>
+<path d="M-17 -312 L17 -312 M-17 -324 L17 -324" stroke="#1F1D1C" stroke-width="2"></path>
+<path d="M-16 -336 L-16 -372 Q-16 -386 0 -386 Q16 -386 16 -372 L16 -336 Z" fill="#C8452F" stroke="#1F1D1C" stroke-width="3"></path>
+</svg>
+</div>
+</div>
+</div>
+</div>
+<svg width="390" height="670" viewBox="0 0 390 670" style="position: absolute; left: 0; top: 0; pointer-events: none; overflow: visible" aria-hidden="true">
+<g style="transform: translate(209px, 438px)"><path class="kira" d="M0 -9 Q1.2 -1.2 9 0 Q1.2 1.2 0 9 Q-1.2 1.2 -9 0 Q-1.2 -1.2 0 -9 Z" style="animation-delay: 8.6s"></path></g>
+<g style="transform: translate(122px, 371px)"><path class="kira" d="M0 -7 Q1 -1 7 0 Q1 1 0 7 Q-1 1 -7 0 Q-1 -1 0 -7 Z" style="animation-delay: 9.5s"></path></g>
+</svg>
+</div>
+</div>
+<div class="face hellface" id="hell" hidden></div>
+</div>
+</div>
+<div class="label" aria-hidden="true">
+<div style="display: flex; flex-direction: column; gap: 1px; font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: .1em; line-height: 1.15; font-weight: 500">
+<span class="ln" style="animation-delay: 7.2s">MDKT INFINITY #002</span>
+<span class="ln" style="animation-delay: 7.35s" id="labelSide">PIE DERECHO · CIELO</span>
+<span class="ln" style="animation-delay: 7.5s">MADKAT × SIROKO</span>
+</div>
+<div style="display: flex; align-items: center; gap: 10px">
+<svg width="74" height="22" viewBox="0 0 74 22"><path id="barcode" fill="#311A25"></path></svg>
+<div style="display: flex; flex-direction: column; align-items: flex-end; line-height: 1">
+<span class="mono" style="font-size: 7.5px; letter-spacing: .14em">Preventa</span>
+<span class="big" style="font-size: 22px; color: #5B3446">LTD</span>
+</div>
+</div>
+</div>
+<div class="gloss"><i></i></div>
+<div class="boom" style="left: 22px; top: 480px"></div>
+<div class="boom" style="left: 368px; top: 522px"></div>
+<div id="shards"></div>
+<div class="imp impA"></div>
+<div class="imp impB"></div>
+<div class="speed"><svg id="speedSvg" width="390" height="670" viewBox="0 0 390 670" aria-hidden="true"></svg></div>
+<div class="sfx s1" style="left: 8px; top: 254px; animation-delay: 6.26s"><img src="assets/madkat.webp" alt="" style="display: block; width: 178px; height: 142px"></div>
+<div class="sfx s2" style="left: 250px; top: 546px; font-size: 42px; animation-delay: 6.36s" aria-hidden="true">ドン!</div>
+<div class="notes" id="notes"><svg id="notesSvg" width="390" height="670" viewBox="0 0 390 670" style="position: absolute; left: 0; top: 0" aria-hidden="true"></svg></div>
+<button class="flipbtn" id="flipbtn" type="button" aria-label="Girar la carta: cielo o infierno"></button>
+</div>
+</div>
+<section class="copy" aria-label="MDKT Infinity #002 — preventa">
+<button class="hint in" id="hintbtn" type="button" style="animation-delay: 7.1s" aria-label="Girar la carta: cielo o infierno">
+<span class="lbl" aria-hidden="true" style="display: flex; align-items: baseline; gap: 10px">
+<span class="big t1" id="tHint">天国か地獄</span>
+<span class="hand t2" id="tBoth">(両方)</span>
+</span>
+<span class="spin" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"></path><path d="M21 3v5h-5"></path><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"></path><path d="M3 21v-5h5"></path></svg></span>
+</button>
+<h1 class="sr">MDKT Infinity #002 — Cielo o infierno. Colección MadKat × Siroko, dibujada a mano. Preventa, unidades muy limitadas.</h1>
+<p class="desc in" style="animation-delay: 7.3s">Colección MadKat × Siroko, dibujada a mano. Un pie de cada bando: tú haces el match.</p>
+<div class="row mono in" style="animation-delay: 7.25s">
+<span class="pre"><span class="dot"></span><span id="tPre" aria-hidden="true">予約販売</span><span class="sr">Preventa</span></span>
+<span class="lim"><span id="tLim" aria-hidden="true">数量限定・超レア</span><span class="sr">Unidades muy limitadas</span></span>
+</div>
+<a class="cta in ctaglow" id="cta" href="https://www.siroko.com/es/c/coleccion-madkat-siroko-one" style="animation-delay: 7.4s">
+<span class="shine"></span>
+<span id="tCta" aria-hidden="true" style="position: relative; white-space: nowrap">いますぐ予約</span><span class="sr">Reserva ahora en preventa la colección MadKat × Siroko</span>
+<span class="arr"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+</a>
+<div class="fliptip mono in" style="animation-delay: 7.8s"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 11V6a2 2 0 0 1 4 0v5M13 11V9a2 2 0 0 1 4 0v4a6 6 0 0 1-6 6H10a5 5 0 0 1-4-2l-2-3a1.6 1.6 0 0 1 2.4-2L9 14"></path></svg>Toca la carta para girarla · mueve el ratón para inclinarla</div>
+</section>
+</main>
+</div>
+<template id="hellTpl">
+<div class="foil hell"></div>
+<div class="hellart">
+<div class="rays"></div>
+<div class="dots"></div>
+<div class="kanji jp" aria-hidden="true">地獄</div>
+<div class="hellholo" id="hellHolo"></div>
+</div>
+<div class="titlebar">
+<div style="display: flex; align-items: baseline; gap: 8px">
+<span class="big" style="font-size: 24px; line-height: 1; color: #FFE3D6">Infierno</span>
+<span class="jp" style="font-size: 11px; font-weight: 700; color: #FF7A5C; letter-spacing: .1em" aria-hidden="true">地獄</span>
+</div>
+<div style="display: flex; align-items: center; gap: 8px" aria-hidden="true">
+<span class="mono" style="font-size: 9px; letter-spacing: .14em; color: #FFB9A6">地獄 · 002</span>
+<span class="typeicon" style="background: #FF7A5C"><img src="assets/madkat.webp" alt="" style="width: 20px; height: 16px"></span>
+</div>
+</div>
+<div class="zpop"><img class="hellshoe" src="assets/hell.webp" alt="Zapatilla MDKT Infinity #002 pie izquierdo, con relieve de llamas y charm de gato demonio"></div>
+<div class="cardinfo mono hellin" style="animation: up .45s cubic-bezier(.2,.7,.1,1) .15s forwards">
+<span class="rivet" style="left: 5px; top: 5px"></span><span class="rivet" style="right: 5px; top: 5px"></span><span class="rivet" style="left: 5px; bottom: 5px"></span><span class="rivet" style="right: 5px; bottom: 5px"></span>
+<div class="moves"><span><i style="background: #FF7A5C"></i>Llamas</span><span><i style="background: #FF7A5C"></i>Gato demonio</span><span><i style="background: #FF7A5C"></i>Ratones K.O.</span></div>
+<div class="foot" style="color: #C98C80"><span>Illus. MadKat × Siroko</span><span class="jp" aria-hidden="true">地獄の足</span><span>★ 002/L</span></div>
+</div>
+</template>
+<script>
+(function(){
+var NS = 'http://www.w3.org/2000/svg';
+var $ = function(id){ return document.getElementById(id); };
+var app = $('app'), stage = $('stage'), wrap = $('stageWrap');
+var DESIGN_W = 390, DESIGN_H = 670;
+/* ---------- responsive scaling ---------- */
+function layout(){
+var vw = window.innerWidth, vh = window.innerHeight;
+var desktop = window.matchMedia('(min-width:900px) and (min-aspect-ratio:1/1)').matches;
+var s = desktop ? Math.min((vh - 110) / DESIGN_H, (vw * 0.48) / DESIGN_W, 1.7) : Math.min(vw / DESIGN_W, vh / 860);
+s = Math.max(s, 0.6);
+document.documentElement.style.setProperty('--s', desktop ? 1 : s);
+stage.style.transform = 'scale(' + s + ')';
+wrap.style.width = (DESIGN_W * s) + 'px';
+wrap.style.height = (DESIGN_H * s) + 'px';
+}
+window.addEventListener('resize', layout);
+/* ---------- helpers ---------- */
+function el(tag, attrs, parent){
+var e = document.createElementNS(NS, tag);
+for (var k in attrs) { if (k === 'style') e.setAttribute('style', attrs[k]); else e.setAttribute(k, attrs[k]); }
+if (parent) parent.appendChild(e);
+return e;
+}
+function prng(seed){ var a = seed; return function(){ a |= 0; a = (a + 0x6D2B79F5) | 0; var t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+var f3 = function(n){ return Number(n).toFixed(3); };
+/* ---------- build drawing ---------- */
+function buildDrawing(d){
+var K = 2.4 / 3.0, HK = 1.35 / 1.9;
+var mask = document.getElementById('hatchmask');
+d.hat.forEach(function(p){
+el('path', { 'class':'hm', d:p.d, style:'stroke-dasharray:'+p.l+';stroke-dashoffset:'+p.l+';animation-delay:'+f3(3.45+(p.t-3.0)*HK)+'s;animation-duration:'+f3(p.u*HK)+'s' }, mask);
+});
+var inks = $('inks');
+var L = function(x1,y1,x2,y2){ return Math.ceil(Math.hypot(x2-x1,y2-y1))+4; };
+var ln = function(x1,y1,x2,y2,t,u,cls){ return { d:'M'+x1+' '+y1+' L'+x2+' '+y2, l:L(x1,y1,x2,y2), t:t, u:u, cls:cls||'c' }; };
+var E = function(cx,cy,rx,ry,t,u){ return { d:'M'+(cx-rx)+' '+cy+' A'+rx+' '+ry+' 0 1 1 '+(cx+rx)+' '+cy+' A'+rx+' '+ry+' 0 1 1 '+(cx-rx)+' '+cy, l:Math.ceil(2*Math.PI*Math.sqrt((rx*rx+ry*ry)/2))+6, t:t, u:u, cls:'c' }; };
+var cons = [
+ln(-200,520,1900,520,.05,.5,'cf'), ln(40,936,1620,924,.12,.45), ln(110,782,1580,800,.22,.42), ln(262,60,244,1040,.3,.38),
+ln(1402,600,1398,1040,.36,.34), ln(250,930,1900,760,.42,.5,'cf'), ln(262,180,1900,330,.48,.5,'cf'), ln(150,290,1000,100,.55,.4),
+ln(540,40,1240,780,.62,.42), E(1250,800,170,64,.72,.4), E(505,212,270,38,.8,.42), E(300,640,70,250,.9,.42), E(815,612,70,70,1.0,.3)
+];
+cons.forEach(function(p){ el('path', { 'class':p.cls, d:p.d, style:'stroke-dasharray:'+p.l+';stroke-dashoffset:'+p.l+';animation-delay:'+f3(p.t)+'s;animation-duration:'+f3(p.u)+'s' }, inks); });
+var g = el('g', { style:'transform:translate(2px,1.5px)' }, inks);
+d.key.forEach(function(p){ var st='stroke-dasharray:'+p.l+';stroke-dashoffset:'+p.l+';animation-delay:'+f3(1.0+(p.t-0.6)*K)+'s;animation-duration:'+f3(Math.max(p.u*K,.02))+'s'; el('path',{'class':'kg',d:p.d,style:st},g); });
+d.key.forEach(function(p){ var st='stroke-dasharray:'+p.l+';stroke-dashoffset:'+p.l+';animation-delay:'+f3(1.0+(p.t-0.6)*K)+'s;animation-duration:'+f3(Math.max(p.u*K,.02))+'s'; el('path',{'class':'k',d:p.d,style:st},inks); });
+document.querySelector('.penA').style.offsetPath = "path('" + d.pen + "')";
+document.querySelector('.penB').style.offsetPath = "path('" + d.hpen + "')";
+}
+/* ---------- notes on paper ---------- */
+function buildNotes(){
+var svg = $('notesSvg'), box = $('notes');
+[
+{ text:'charm gato ángel', x:212, y:612, sx:250, sy:606, cx:246, cy:540, ex:207, ey:468, t:2.6 },
+{ text:'puntera ante', x:262, y:340, sx:318, sy:372, cx:350, cy:420, ex:338, ey:480, t:3.0 }
+].forEach(function(n){
+var ang = Math.atan2(n.ey-n.cy, n.ex-n.cx), h = 10;
+var h1x = n.ex-h*Math.cos(ang-.45), h1y = n.ey-h*Math.sin(ang-.45), h2x = n.ex-h*Math.cos(ang+.45), h2y = n.ey-h*Math.sin(ang+.45);
+var len = Math.ceil(Math.hypot(n.ex-n.sx, n.ey-n.sy)*1.25+24);
+el('path', { 'class':'arrow', d:'M'+n.sx+' '+n.sy+' Q'+n.cx+' '+n.cy+' '+n.ex+' '+n.ey+' M'+h1x.toFixed(1)+' '+h1y.toFixed(1)+' L'+n.ex+' '+n.ey+' L'+h2x.toFixed(1)+' '+h2y.toFixed(1), style:'stroke-dasharray:'+len+';stroke-dashoffset:'+len+';animation-delay:'+n.t+'s' }, svg);
+var dv = document.createElement('div'); dv.className = 'note hand'; dv.textContent = n.text;
+dv.style.cssText = 'left:'+n.x+'px;top:'+n.y+'px;animation-delay:'+(n.t-.35).toFixed(2)+'s';
+box.appendChild(dv);
+});
+}
+/* ---------- impact: cracks, shards, speed lines, barcode ---------- */
+function buildImpact(){
+var rnd = prng(11);
+var hits = [{ x:22, y:480, a0:-1.35, a1:1.35, t:6.28, dir:-1 }, { x:368, y:522, a0:Math.PI-1.35, a1:Math.PI+1.35, t:6.3, dir:1 }];
+var svg = $('crackSvg'), cracks = [], glass = [];
+var fmt = function(pts){ return 'M' + pts.map(function(p){ return p[0].toFixed(1)+' '+p[1].toFixed(1); }).join(' L'); };
+var len = function(pts){ var l=0; for (var i=1;i<pts.length;i++) l+=Math.hypot(pts[i][0]-pts[i-1][0], pts[i][1]-pts[i-1][1]); return Math.ceil(l)+2; };
+hits.forEach(function(h){
+var tips = [];
+for (var i=0;i<12;i++){
+var a = h.a0+(h.a1-h.a0)*(i+.2+rnd()*.6)/12, x=h.x, y=h.y, pts=[[x,y]], Lg=22+rnd()*52, segs=2+Math.floor(rnd()*3);
+for (var s=0;s<segs;s++){ a+=(rnd()-.5)*.35; var st=(Lg/segs)*(.7+rnd()*.6); x+=Math.cos(a)*st; y+=Math.sin(a)*st; pts.push([x,y]); }
+tips.push(pts); cracks.push({ d:fmt(pts), l:len(pts), t:(h.t+rnd()*.04).toFixed(3) });
+}
+[9,20,34].forEach(function(r, ri){
+var piece=[];
+for (var a=h.a0;a<=h.a1+.001;a+=.24){ var rr=r*(.85+rnd()*.3); piece.push([h.x+Math.cos(a)*rr, h.y+Math.sin(a)*rr]); if (rnd()<.28 && piece.length>1){ cracks.push({ d:fmt(piece), l:len(piece), t:(h.t+.05+ri*.025).toFixed(3) }); piece=[]; } }
+if (piece.length>1) cracks.push({ d:fmt(piece), l:len(piece), t:(h.t+.05+ri*.025).toFixed(3) });
+});
+for (var j=0;j+1<tips.length;j+=2){ var A=tips[j], B=tips[j+1], pa=A[Math.min(1,A.length-1)], pb=B[Math.min(1,B.length-1)]; glass.push('M'+h.x+' '+h.y+' L'+pa[0].toFixed(1)+' '+pa[1].toFixed(1)+' L'+pb[0].toFixed(1)+' '+pb[1].toFixed(1)+' Z'); }
+});
+glass.forEach(function(g){ el('path', { 'class':'glass', d:g }, svg); });
+cracks.forEach(function(c){
+el('path', { 'class':'crkd', d:c.d, style:'stroke-dasharray:'+c.l+';stroke-dashoffset:'+c.l+';animation-delay:'+c.t+'s' }, svg);
+el('path', { 'class':'crk', d:c.d, style:'stroke-dasharray:'+c.l+';stroke-dashoffset:'+c.l+';animation-delay:'+c.t+'s' }, svg);
+});
+var box = $('shards');
+hits.forEach(function(h){
+for (var i=0;i<9;i++){
+var dx=h.dir*(30+rnd()*110), dy=-(30+rnd()*120), fall=260+rnd()*200, sz=4+rnd()*6, pts=[], k=3+Math.floor(rnd()*2);
+for (var j=0;j<k;j++){ var a=(j/k)*Math.PI*2+rnd()*.8, r=sz*(.5+rnd()*.6); pts.push((Math.cos(a)*r).toFixed(1)+' '+(Math.sin(a)*r).toFixed(1)); }
+var dv = document.createElement('div'); dv.className='shard';
+dv.style.cssText = 'left:'+h.x+'px;top:'+(h.y+(rnd()-.5)*30).toFixed(1)+'px;animation-delay:'+(h.t+rnd()*.06).toFixed(3)+'s;animation-duration:'+(.9+rnd()*.6).toFixed(2)+'s';
+dv.style.offsetPath = "path('M0 0 Q"+(dx*.6).toFixed(0)+' '+(dy*1.4).toFixed(0)+' '+dx.toFixed(0)+' '+(dy+fall).toFixed(0)+"')";
+var sv = el('svg', { width:20, height:20, viewBox:'-10 -10 20 20', style:'animation-duration:'+(.25+rnd()*.5).toFixed(2)+'s' }, dv);
+el('path', { d:'M'+pts.join(' L')+' Z', fill:'rgba(236,226,232,.82)', stroke:'#FFFFFF', 'stroke-width':'.6' }, sv);
+box.appendChild(dv);
+}
+});
+var sp = $('speedSvg');
+for (var i=0;i<84;i++){
+var a=(i/84)*Math.PI*2+(rnd()-.5)*.05, r0=150+rnd()*70, r1=900, w=.006+rnd()*.016, cx=195, cy=435;
+el('path', { d:'M'+(cx+Math.cos(a)*r0).toFixed(1)+' '+(cy+Math.sin(a)*r0).toFixed(1)+' L'+(cx+Math.cos(a-w)*r1).toFixed(1)+' '+(cy+Math.sin(a-w)*r1).toFixed(1)+' L'+(cx+Math.cos(a+w)*r1).toFixed(1)+' '+(cy+Math.sin(a+w)*r1).toFixed(1)+' Z' }, sp);
+}
+var x=0, bd='';
+while (x<72){ var bw=1+Math.floor(rnd()*3); if (rnd()>.35) bd+='M'+x+' 0h'+bw+'v22h-'+bw+'Z'; x+=bw+1; }
+$('barcode').setAttribute('d', bd);
+}
+/* ---------- decode (JP -> ES) ---------- */
+var KANA = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンガギグゲゴザジズゼゾダヂヅデドバビブベボパピプペポッャュョー';
+var decodes = [
+{ id:'tHint', to:'Cielo o infierno', jp:'天国か地獄', s:7100, d:1000 },
+{ id:'tBoth', to:'(o los dos)', jp:'(両方)', s:7500, d:900 },
+{ id:'tPre', to:'PREVENTA', jp:'予約販売', s:7250, d:900 },
+{ id:'tLim', to:'UNIDADES MUY LIMITADAS', jp:'数量限定・超レア', s:7350, d:1300 },
+{ id:'tCta', to:'Reserva ahora', jp:'いますぐ予約', s:7400, d:900 }
+];
+function decode(t, jp, p){
+if (p <= .18) return jp;
+if (p >= 1) return t;
+var q = (p - .18) / .82, out = '';
+for (var i=0;i<t.length;i++){ var ch=t[i]; out += q >= (i+1)/t.length ? ch : (ch===' ' ? ' ' : KANA[Math.floor(Math.random()*KANA.length)]); }
+return out;
+}
+var t0 = 0, lastTick = 0;
+function tick(now){
+var el2 = now - t0, busy = false;
+if (now - lastTick > 50){
+lastTick = now;
+decodes.forEach(function(o){
+var p = (el2 - o.s) / o.d;
+if (!o.done){ $(o.id).textContent = decode(o.to, o.jp, p); if (p >= 1) o.done = true; else busy = true; }
+});
+} else busy = true;
+if (busy) requestAnimationFrame(tick);
+}
+/* ---------- flip ---------- */
+var side = 'heaven', flipping = false, hellBuilt = false;
+function flipCard(){
+if (flipping || performance.now() - t0 < 7600) return;
+flipping = true;
+var fl = $('flipper');
+fl.className = 'flipper out';
+setTimeout(function(){
+side = side === 'heaven' ? 'hell' : 'heaven';
+var hell = $('hell'), front = $('front');
+if (side === 'hell'){
+hell.innerHTML = ''; hell.appendChild(document.getElementById('hellTpl').content.cloneNode(true));
+hell.hidden = false; front.classList.add('gone');
+} else { hell.hidden = true; hell.innerHTML = ''; front.classList.remove('gone'); }
+$('labelSide').textContent = side === 'hell' ? 'PIE IZQUIERDO · INFIERNO' : 'PIE DERECHO · CIELO';
+$('cta').classList.toggle('hellcta', side === 'hell');
+fl.className = 'flipper in2';
+setTimeout(function(){ fl.className = 'flipper'; flipping = false; }, 440);
+}, 260);
+}
+$('flipbtn').addEventListener('click', flipCard);
+$('hintbtn').addEventListener('click', flipCard);
+/* ---------- tilt ---------- */
+var tiltEl = $('tiltall');
+function applyTilt(nx, ny){
+if (performance.now() - t0 < 8200) return;
+nx = Math.max(-1, Math.min(1, nx)); ny = Math.max(-1, Math.min(1, ny));
+tiltEl.style.transform = 'perspective(900px) rotateY(' + (nx*6).toFixed(2) + 'deg) rotateX(' + (-ny*5).toFixed(2) + 'deg) scale(.975)';
+var bp = (50 - nx*45).toFixed(1) + '% 0';
+var sh = $('shoeHolo'); sh.style.backgroundPosition = bp; sh.style.opacity = (.45 + Math.abs(nx)*.45).toFixed(2);
+var ah = $('artHolo'); ah.style.backgroundPosition = (nx*30).toFixed(0)+'px '+(ny*30).toFixed(0)+'px, '+(11-nx*20).toFixed(0)+'px '+(7-ny*20).toFixed(0)+'px, '+bp; ah.style.opacity = (.3 + Math.abs(nx)*.35).toFixed(2);
+var hh = $('hellHolo'); if (hh) hh.style.backgroundPosition = (nx*30).toFixed(0)+'px '+(ny*30).toFixed(0)+'px, '+bp;
+}
+function resetTilt(){ tiltEl.style.transform = ''; }
+window.addEventListener('pointermove', function(e){
+var r = wrap.getBoundingClientRect();
+var cx = r.left + r.width/2, cy = r.top + r.height/2;
+applyTilt((e.clientX - cx) / (r.width/2), (e.clientY - cy) / (r.height/2));
+});
+document.addEventListener('pointerleave', resetTilt);
+window.addEventListener('deviceorientation', function(e){ if (e.gamma == null) return; applyTilt(e.gamma/25, ((e.beta||45)-45)/25); });
+/* ---------- boot ---------- */
+function loadImg(src){ return new Promise(function(res){ var i = new Image(); i.onload = i.onerror = function(){ res(); }; i.src = src; }); }
+Promise.all([
+fetch('assets/paths.json').then(function(r){ return r.json(); }),
+loadImg('assets/shoe.webp'), loadImg('assets/rubius.webp'), loadImg('assets/burn.webp'), loadImg('assets/ember.webp'),
+document.fonts && document.fonts.ready ? Promise.race([document.fonts.ready, new Promise(function(r){ setTimeout(r, 1500); })]) : Promise.resolve()
+]).then(function(res){
+buildDrawing(res[0]); buildNotes(); buildImpact(); layout();
+app.classList.add('on');
+$('loader').classList.add('hide');
+t0 = performance.now();
+requestAnimationFrame(tick);
+setTimeout(flipCard, 11500);
+setTimeout(function(){ if (side === 'hell') flipCard(); }, 14200);
+loadImg('assets/hell.webp');
+});
+})();
+</script>
+</body>
+</html>
