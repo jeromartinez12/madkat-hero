@@ -117,8 +117,8 @@ button{font:inherit}
 .vig{position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,7,11,.8) 0,rgba(14,7,11,0) 58px,rgba(14,7,11,0) 400px,rgba(14,7,11,.7) 470px,rgba(14,7,11,.95) 526px);opacity:0;animation:fadeIn .6s ease 6.8s forwards}
 .artholo{position:absolute;inset:0;opacity:0;mix-blend-mode:color-dodge;background-image:radial-gradient(circle,rgba(255,220,240,.9) .8px,transparent 1.6px),radial-gradient(circle,rgba(170,210,255,.8) .7px,transparent 1.5px),linear-gradient(115deg,rgba(255,0,150,0) 30%,rgba(255,140,200,.35) 45%,rgba(140,200,255,.35) 55%,rgba(255,0,150,0) 70%);background-size:23px 19px,31px 27px,300% 100%;background-position:0 0,11px 7px,50% 0;animation:holoIn .8s ease 7.3s forwards;transition:background-position .35s ease-out}
 @keyframes holoIn{to{opacity:.32}}
-.titlebar{position:absolute;left:41px;top:119px;width:308px;height:40px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;clip-path:inset(0 100% 0 0);animation:type .5s cubic-bezier(.7,0,.2,1) 7.9s forwards}
-.cardinfo{position:absolute;left:41px;top:592px;width:308px;height:53px;padding:0 20px;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:6px;opacity:0;animation:up .6s cubic-bezier(.2,.7,.1,1) 8.1s forwards}
+.titlebar{position:absolute;left:41px;top:122px;width:308px;height:40px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;clip-path:inset(0 100% 0 0);animation:type .5s cubic-bezier(.7,0,.2,1) 7.9s forwards}
+.cardinfo{position:absolute;left:41px;top:119px;width:308px;height:526px;pointer-events:none;opacity:0;animation:up .6s cubic-bezier(.2,.7,.1,1) 8.1s forwards}
 .rivet{position:absolute;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFFFFF 0%,#D9D2D6 28%,#8A7F86 62%,#3E353B 100%);box-shadow:0 1px 1.5px rgba(0,0,0,.7), inset 0 -1px 1px rgba(0,0,0,.35)}
 .moves{display:flex;justify-content:space-between;gap:6px;font-size:9px;letter-spacing:.06em;color:#EFE7DA;white-space:nowrap}
 .moves span{display:flex;align-items:center;gap:4px}
@@ -138,7 +138,7 @@ button{font:inherit}
 .hellholo{position:absolute;inset:0;mix-blend-mode:color-dodge;opacity:.35;background-image:radial-gradient(circle,rgba(255,190,120,.9) .8px,transparent 1.6px),linear-gradient(115deg,transparent 30%,rgba(255,120,60,.4) 48%,rgba(255,220,120,.35) 55%,transparent 70%);background-size:23px 19px,300% 100%;background-position:0 0,50% 0;transition:background-position .35s ease-out}
 .hellin{opacity:0;animation:up .45s cubic-bezier(.2,.7,.1,1) .15s forwards}
 .hellface .titlebar{animation:none;clip-path:none;background:linear-gradient(180deg,rgba(20,4,8,.85),rgba(20,4,8,0))}
-.hellface .cardinfo{background:linear-gradient(180deg,rgba(20,4,8,0),rgba(20,4,8,.9) 40%)}
+.hellface .cardinfo{background:none}
 .screen{position:absolute;inset:0;animation:shake .5s linear 6.3s both}
 @keyframes shake{0%{transform:none}10%{transform:translate(-7px,4px) rotate(-.6deg)}25%{transform:translate(6px,-5px) rotate(.5deg)}40%{transform:translate(-4px,3px)}60%{transform:translate(3px,-2px)}80%{transform:translate(-1px,1px)}100%{transform:none}}
 .cardcracks{position:absolute;inset:0;clip-path:inset(58px 22px 8px 22px round 16px);pointer-events:none}
@@ -249,7 +249,7 @@ button{font:inherit}
 </div>
 </div>
 <div class="cardinfo mono">
-<span class="rivet" style="left: 5px; top: 5px"></span><span class="rivet" style="right: 5px; top: 5px"></span><span class="rivet" style="left: 5px; bottom: 5px"></span><span class="rivet" style="right: 5px; bottom: 5px"></span>
+<span class="rivet" style="left: 6px; top: 6px"></span><span class="rivet" style="right: 6px; top: 6px"></span><span class="rivet" style="left: 6px; bottom: 6px"></span><span class="rivet" style="right: 6px; bottom: 6px"></span>
 </div>
 <div class="slash"><i></i></div>
 </div>
@@ -381,7 +381,7 @@ button{font:inherit}
 </div>
 <div class="zpop"><img class="hellshoe" src="assets/hell.webp" alt="Zapatilla MDKT Infinity #002 pie izquierdo, con relieve de llamas y charm de gato demonio"></div>
 <div class="cardinfo mono hellin" style="animation: up .45s cubic-bezier(.2,.7,.1,1) .15s forwards">
-<span class="rivet" style="left: 5px; top: 5px"></span><span class="rivet" style="right: 5px; top: 5px"></span><span class="rivet" style="left: 5px; bottom: 5px"></span><span class="rivet" style="right: 5px; bottom: 5px"></span>
+<span class="rivet" style="left: 6px; top: 6px"></span><span class="rivet" style="right: 6px; top: 6px"></span><span class="rivet" style="left: 6px; bottom: 6px"></span><span class="rivet" style="right: 6px; bottom: 6px"></span>
 </div>
 </template>
 <script>
