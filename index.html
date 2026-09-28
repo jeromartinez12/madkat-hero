@@ -18,7 +18,9 @@
 :root{--s:1}
 *{box-sizing:border-box}
 html,body{margin:0;background:#010101;color:#EFE7DA;font-family:'Archivo','Noto Sans JP',sans-serif;-webkit-font-smoothing:antialiased}
-body{overflow-x:hidden}
+html,body{overflow-x:hidden;max-width:100%}
+#app{width:100%;overflow:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}#app{overflow:clip}}
 button{font:inherit}
 .hand{font-family:'Caveat','Noto Sans JP',cursive;font-weight:700}
 .mono{font-family:'JetBrains Mono','Noto Sans JP',monospace;text-transform:uppercase}
